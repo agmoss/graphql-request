@@ -1,6 +1,6 @@
-import { TypedDocumentNode } from '@graphql-typed-document-node/core'
-import { DocumentNode } from 'graphql/language/ast'
-import type { GraphQLError } from 'graphql/error/GraphQLError'
+import { TypedDocumentNode } from './gql-stubs'
+import { DocumentNode } from './gql-stubs'
+import type { GraphQLError } from './gql-stubs'
 import * as Dom from './types.dom'
 
 export type { GraphQLError }

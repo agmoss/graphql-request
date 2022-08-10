@@ -56,7 +56,7 @@ afterAll(() => {
 test('graphql-ws request', async () => {
   const client = await createClient(ctx.url)
   const data = client.request(
-    gql`
+    `
       query hello {
         hello
       }
@@ -71,7 +71,7 @@ test('graphql-ws subscription', async () => {
   const result = new Promise<string>((resolve) => {
     var allGreatings = ''
     client.subscribe<{ greetings: string }>(
-      gql`
+      `
         subscription greetings {
           greetings
         }

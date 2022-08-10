@@ -1,9 +1,9 @@
 import crossFetch, * as CrossFetch from 'cross-fetch'
-import { TypedDocumentNode } from '@graphql-typed-document-node/core'
-import { OperationDefinitionNode, DocumentNode } from 'graphql/language/ast'
+import { TypedDocumentNode } from './gql-stubs'
+import { DocumentNode } from './gql-stubs'
 
-import { parse } from 'graphql/language/parser'
-import { print } from 'graphql/language/printer'
+import { parse } from './gql-stubs'
+import { print } from './gql-stubs'
 import createRequestBody from './createRequestBody'
 import { defaultJsonSerializer } from './defaultJsonSerializer'
 import {
@@ -664,17 +664,23 @@ async function getResult(response: Dom.Response, jsonSerializer = defaultJsonSer
  */
 
 function extractOperationName(document: DocumentNode): string | undefined {
-  let operationName = undefined
+  const contents = document.split(' ')
 
-  const operationDefinitions = document.definitions.filter(
-    (definition) => definition.kind === 'OperationDefinition'
-  ) as OperationDefinitionNode[]
-
-  if (operationDefinitions.length === 1) {
-    operationName = operationDefinitions[0].name?.value
+  if (contents.length === 1) {
+    return undefined
   }
 
-  return operationName
+  if (contents[0] === '{') {
+    return contents[1]
+  }
+
+  const found = contents.findIndex((str) => str === 'query' || str === 'mutation' || str === 'subscription')
+
+  if (found === -1) {
+    return undefined
+  } else {
+    return contents[found + 1]
+  }
 }
 
 export function resolveRequestDocument(document: RequestDocument): { query: string; operationName?: string } {
