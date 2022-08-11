@@ -679,7 +679,7 @@ function extractOperationName(document: DocumentNode): string | undefined {
   if (found === -1) {
     return undefined
   } else {
-    return contents[found + 1]
+    return contents[found + 1].split('(')[0]
   }
 }
 
