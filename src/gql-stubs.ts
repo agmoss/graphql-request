@@ -1,39 +1,28 @@
 /**
  * Stub DocumentNode
  *
- * Originally imported from 'graphql/language/ast'
+ * Originally imported from 'graphql/language/ast' as a named import
  */
 export type DocumentNode = string
 
+/**
+ * Stub TypedDocumentNode
+ *
+ * Originally imported from '@graphql-typed-document-node/core' as a named import
+ */
 export type TypedDocumentNode<T, S> = string
-
-// export interface TypedDocumentNode<
-//   Result = {
-//     [key: string]: any
-//   },
-//   Variables = {
-//     [key: string]: any
-//   }
-// > extends DocumentNode {
-//   /**
-//    * This type is used to ensure that the variables you pass in to the query are assignable to Variables
-//    * and that the Result is assignable to whatever you pass your result to. The method is never actually
-//    * implemented, but the type is valid because we list it as optional
-//    */
-//   __apiType?: (variables: Variables) => Result
-// }
 
 /**
  * Stub OperationDefinitionNode
  *
- * Originally imported from 'graphql/language/ast'
+ * Originally imported from 'graphql/language/ast' as a named import
  */
 export type OperationDefinitionNode = any
 
 /**
  * Stub GraphQLError
  *
- * Originally imported from 'graphql/error/GraphQLError'
+ * Originally imported from 'graphql/error/GraphQLError' as a named import
  */
 export class GraphQLError extends Error {}
 
@@ -41,6 +30,8 @@ export class GraphQLError extends Error {}
  * GRAPHQL-JS LIBRARY DESCRIPTION:
  * Given a GraphQL source, parses it into a Document.
  * Throws GraphQLError if a syntax error is encountered.
+ *
+ * Originally imported from 'graphql/language/parse' as a named import
  */
 export function parse(source: string, options?: never) {
   return source
@@ -51,7 +42,7 @@ export function parse(source: string, options?: never) {
  * Converts an AST into a string, using one set of reasonable
  * formatting rules.
  *
- * Originally imported from 'graphql/language/printer'
+ * Originally imported from 'graphql/language/printer' as a named import
  */
 
 export function print(ast: string) {
