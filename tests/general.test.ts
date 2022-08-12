@@ -279,7 +279,7 @@ describe('operationName parsing', () => {
     const mock = ctx.res({ body: { data: { foo: 1 } } })
     await request(
       ctx.url,
-      gql`
+      `
         query myGqlOperation {
           users
         }
