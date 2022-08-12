@@ -1,5 +1,5 @@
 {
-  "name": "graphql-request",
+  "name": "graphql-request-less-graphql",
   "version": "0.0.0-dripip",
   "main": "dist/index.js",
   "files": [

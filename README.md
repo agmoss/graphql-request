@@ -1,6 +1,6 @@
-# graphql-request
+# graphql-request-less-graphql
 
-Minimal GraphQL client supporting Node and browsers for scripts or simple apps
+Minimal GraphQL client supporting Node and browsers for scripts or simple apps (without requiring [graphql](https://www.npmjs.com/package/graphql))
 
 ![GitHub Action](https://github.com/prisma-labs/graphql-request/workflows/trunk/badge.svg) [![npm version](https://badge.fury.io/js/graphql-request.svg)](https://badge.fury.io/js/graphql-request)
 
@@ -739,7 +739,7 @@ Return both the errors and data, only works with `rawRequest`.
 
 #### Why do I have to install `graphql`?
 
-`graphql-request` uses methods exposed by the `graphql` package to handle some internal logic. On top of that, for TypeScript users, some types are used from the `graphql` package to provide better typings.
+You don't! However, by using this package you forgo the benefit of using `gql` from `graphql-tag` and all the benefits of graphql validation.  
 
 #### Do I need to wrap my GraphQL documents inside the `gql` template exported by `graphql-request`?
 
