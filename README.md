@@ -7,46 +7,62 @@ Minimal GraphQL client supporting Node and browsers for scripts or simple apps (
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [graphql-request](#graphql-request)
-  - [Features](#features)
-  - [Install](#install)
-  - [Quickstart](#quickstart)
-  - [Usage](#usage)
-  - [Node Version Support](#node-version-support)
-  - [Community](#community)
-      - [GraphQL Code Generator's GraphQL-Request TypeScript Plugin](#graphql-code-generators-graphql-request-typescript-plugin)
-  - [Examples](#examples)
-    - [Authentication via HTTP header](#authentication-via-http-header)
-      - [Incrementally setting headers](#incrementally-setting-headers)
-      - [Set endpoint](#set-endpoint)
-      - [passing-headers-in-each-request](#passing-headers-in-each-request)
-      - [Passing dynamic headers to the client](#passing-dynamic-headers-to-the-client)
-    - [Passing more options to `fetch`](#passing-more-options-to-fetch)
-    - [Custom JSON serializer](#custom-json-serializer)
-    - [Using GraphQL Document variables](#using-graphql-document-variables)
-    - [Making a GET request](#making-a-get-request)
-    - [GraphQL Mutations](#graphql-mutations)
-    - [Error handling](#error-handling)
-    - [Using `require` instead of `import`](#using-require-instead-of-import)
-    - [Cookie support for `node`](#cookie-support-for-node)
-    - [Using a custom `fetch` method](#using-a-custom-fetch-method)
-    - [Receiving a raw response](#receiving-a-raw-response)
-    - [File Upload](#file-upload)
-      - [Browser](#browser)
-      - [Node](#node)
-    - [Batching](#batching)
-    - [Cancellation](#cancellation)
-    - [Middleware](#middleware)
-    - [ErrorPolicy](#errorpolicy)
-      - [None (default)](#none-default)
-      - [Ignore](#ignore)
-      - [All](#all)
-  - [FAQ](#faq)
-      - [Why do I have to install `graphql`?](#why-do-i-have-to-install-graphql)
-      - [Do I need to wrap my GraphQL documents inside the `gql` template exported by `graphql-request`?](#do-i-need-to-wrap-my-graphql-documents-inside-the-gql-template-exported-by-graphql-request)
-      - [What's the difference between `graphql-request`, Apollo and Relay?](#whats-the-difference-between-graphql-request-apollo-and-relay)
+- [Why?](#why)
+- [Features](#features)
+- [Install](#install)
+- [Quickstart](#quickstart)
+- [Usage](#usage)
+- [Node Version Support](#node-version-support)
+- [Community](#community)
+    - [GraphQL Code Generator's GraphQL-Request TypeScript Plugin](#graphql-code-generators-graphql-request-typescript-plugin)
+- [Examples](#examples)
+  - [Authentication via HTTP header](#authentication-via-http-header)
+    - [Incrementally setting headers](#incrementally-setting-headers)
+    - [Set endpoint](#set-endpoint)
+    - [passing-headers-in-each-request](#passing-headers-in-each-request)
+    - [Passing dynamic headers to the client](#passing-dynamic-headers-to-the-client)
+  - [Passing more options to `fetch`](#passing-more-options-to-fetch)
+  - [Custom JSON serializer](#custom-json-serializer)
+  - [Using GraphQL Document variables](#using-graphql-document-variables)
+  - [Making a GET request](#making-a-get-request)
+  - [GraphQL Mutations](#graphql-mutations)
+  - [Error handling](#error-handling)
+  - [Using `require` instead of `import`](#using-require-instead-of-import)
+  - [Cookie support for `node`](#cookie-support-for-node)
+  - [Using a custom `fetch` method](#using-a-custom-fetch-method)
+  - [Receiving a raw response](#receiving-a-raw-response)
+  - [File Upload](#file-upload)
+    - [Browser](#browser)
+    - [Node](#node)
+  - [Batching](#batching)
+  - [Cancellation](#cancellation)
+  - [Middleware](#middleware)
+  - [ErrorPolicy](#errorpolicy)
+    - [None (default)](#none-default)
+    - [Ignore](#ignore)
+    - [All](#all)
+- [FAQ](#faq)
+    - [Why do I have to install `graphql`?](#why-do-i-have-to-install-graphql)
+    - [Do I need to wrap my GraphQL documents inside the `gql` template exported by `graphql-request`?](#do-i-need-to-wrap-my-graphql-documents-inside-the-gql-template-exported-by-graphql-request)
+    - [What's the difference between `graphql-request`, Apollo and Relay?](#whats-the-difference-between-graphql-request-apollo-and-relay)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Why?
+
+`graphql` must be installed to use `graphql-request` [see](https://github.com/prisma-labs/graphql-request#why-do-i-have-to-install-graphql).
+
+This is mainly for performing document parsing and printing. This is helpful as it provides a safety layer to prevent graphql syntax errors.
+
+At the API level of `graphql-request`, the inclusion of `graphql` allows for the user to model their queries and mutations as a graphql `DocumentNode` (or just a string)
+
+While these are nice features, they create a significant addition to client code (10.84 kb gzipped in my case).
+
+![image](https://user-images.githubusercontent.com/43680871/184004515-1ddf4851-aaba-41d1-bd39-7c58ead7d322.png)
+
+At the end of the day, a graphql query or mutation is just a POST. The request options can be "stringly" typed and devoid of validation. The keyword here is can. Whether they should or not is up to the programmer.
+
+This is an attempt to make that a possibility within the same (or similar) API & functionality provided by `graphql-request`.
 
 ## Features
 
@@ -615,7 +631,6 @@ It is possible with `graphql-request` to use [batching](https://github.com/graph
 
 ```ts
 import { batchRequests } from 'graphql-request'
-
 ;(async function () {
   const endpoint = 'https://api.spacex.land/graphql/'
 
@@ -739,7 +754,7 @@ Return both the errors and data, only works with `rawRequest`.
 
 #### Why do I have to install `graphql`?
 
-You don't! However, by using this package you forgo the benefit of using `gql` from `graphql-tag` and all the benefits of graphql validation.  
+You don't! However, by using this package you forgo the benefit of using `gql` from `graphql-tag` and all the benefits of graphql validation.
 
 #### Do I need to wrap my GraphQL documents inside the `gql` template exported by `graphql-request`?
 
